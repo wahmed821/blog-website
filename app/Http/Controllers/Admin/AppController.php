@@ -15,7 +15,7 @@ class AppController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     ## Dashboard
@@ -107,7 +107,7 @@ class AppController extends Controller
             ->where('status', 'active')
             ->orderBy('category_name')->get();
 
-        # Call the category data
+        # Call the Blog data
         $data['blog'] = Blog::find($id);
 
         # Get all blog categories in comma seperated
@@ -218,7 +218,7 @@ class AppController extends Controller
             $action = ($value == 'active') ? 'activated' : 'inactivated';
             return redirect()->back()->withStatus("Record has been successfully " . $action);
         } else {
-            return redirect()->route('categories')->withError("Something went wrong, please try again");
+            return redirect()->back()->withError("Something went wrong, please try again");
         }
     }
 

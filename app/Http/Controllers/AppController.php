@@ -14,12 +14,14 @@ class AppController extends Controller
     ## Index page
     public function index()
     {
-        $query = Blog::with('categories');
-        $query->where(['status' => 'active']);
-        if (isset($_GET['query']) && !empty($_GET['query'])) {
+        /*if (isset($_GET['query']) && !empty($_GET['query'])) {
             $q = $_GET['query'];
             $query->where('blog_title', 'LIKE',  "%$q%");
-        }
+        }*/
+
+
+        $query = Blog::with('categories');
+        $query->where(['status' => 'active']);
         $blogs = $query->orderBy('id', 'desc')->paginate(2);
 
         $blogsWithCategories = $blogs->map(function ($blog) {

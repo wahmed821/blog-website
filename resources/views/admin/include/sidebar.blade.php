@@ -95,6 +95,24 @@
                         <span> Blog Comments </span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="#staffs" data-toggle="collapse">
+                        <i data-feather="users"></i>
+                        <span> Staff Members </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="staffs">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('staffs.add') }}">Add</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('staffs') }}">Manage</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
 
         </div>

@@ -1,11 +1,13 @@
 # Project Name: Blog Website
 
-# Command to crate migration
+# Database migration
 
 php artisan make:migration create_categories_table --create=categories
 php artisan make:migration create_blogs_table --create=blogs
 php artisan make:migration create_blog_categories_table --create=blog_categories
 php artisan make:migration create_blog_comments_table --create=blog_comments
+php artisan make:migration create_roles_table --create=roles -m
+php artisan migrate
 
 # Auth Installation
 
@@ -17,10 +19,24 @@ php artisan ui vue --auth
 npm install
 npm run dev
 
-# Category routes functionality
+## Admin Panel
 
-# Blog routes functionality
-
-# Change Password
+    # Category routes functionality
+    # Blog routes functionality
+    # Change Password
 
 # Website functionality
+
+    # Home Page
+    # Category Page
+    # Blog Detail Page
+    # Related Posts
+    # Comment Posting
+
+## Multi - Auth with Role ID
+
+1. Step 1 - Create New table 'roles' with migration & model and a new column 'role_id' added in users table.
+2. Step 2 - Create two new middlewares for Admin & Staff and register them in Kernel
+3. Step 3 - Create custom login & logout functionality
+4. Step 4 - Staff Registration
+5. Step 5 - Staff Login & Logout

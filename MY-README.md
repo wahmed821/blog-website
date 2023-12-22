@@ -36,7 +36,15 @@ npm run dev
 ## Multi - Auth with Role ID
 
 1. Step 1 - Create New table 'roles' with migration & model and a new column 'role_id' added in users table.
+
 2. Step 2 - Create two new middlewares for Admin & Staff and register them in Kernel
+
+    - Command to create middleware
+        > > > php artisan make:middleware AdminMiddleware
+        > > > php artisan make:middleware StaffMiddlware
+
 3. Step 3 - Create custom login & logout functionality
+
 4. Step 4 - Staff Registration
+
 5. Step 5 - Staff Login & Logout

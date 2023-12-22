@@ -248,4 +248,9 @@ class AppController extends Controller
 
         return $slug;
     }
+
+    public function staffProfile()
+    {
+        return "<h1>Hello " . Auth::user()->name . "</h1>";
+    }
 }

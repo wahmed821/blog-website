@@ -15,9 +15,12 @@ class StaffController extends Controller
     public function __construct()
     { }
 
-    ## Categories function
+    ## Staff function
     public function staffs()
     {
+        if (Auth::user()->role_id != 1) {
+            return redirect()->route('dashboard');
+        }
         $users = User::select('*')->where('role_id', 3)->with('role')->orderBy('id', 'desc')->get();
         return view("admin.staff.index", compact('users'));
     }
@@ -25,6 +28,9 @@ class StaffController extends Controller
     ## Add Staff function
     public function addStaff()
     {
+        if (Auth::user()->role_id != 1) {
+            return redirect()->route('dashboard');
+        }
         return view('admin.staff.add');
     }
 
@@ -44,6 +50,7 @@ class StaffController extends Controller
             }
             # Insert
             else {
+                //$role_id = DB::table("roles")->select("id")->whre('name', 'staff')->first();
                 $param = array(
                     'name' => $request->name,
                     'email' => $request->email,

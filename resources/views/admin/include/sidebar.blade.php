@@ -96,6 +96,7 @@
                     </a>
                 </li>
 
+                @if(Auth::user()->role_id == 1)
                 <li>
                     <a href="#staffs" data-toggle="collapse">
                         <i data-feather="users"></i>
@@ -113,6 +114,7 @@
                         </ul>
                     </div>
                 </li>
+                @endif
             </ul>
 
         </div>

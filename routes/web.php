@@ -70,7 +70,9 @@ Route::middleware(['auth', 'staff'])->prefix('admin')->group(function () {
 
 # Auth routes
 //Auth::routes();
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+# Custom Auth
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginSubmit'])->name('login-submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -6,7 +6,9 @@ php artisan make:migration create_categories_table --create=categories
 php artisan make:migration create_blogs_table --create=blogs
 php artisan make:migration create_blog_categories_table --create=blog_categories
 php artisan make:migration create_blog_comments_table --create=blog_comments
-php artisan make:migration create_roles_table --create=roles -m
+php artisan make:migration create_roles_table --create=roles
+php artisan make:migration create_verification_codes_table --create=verification_codes
+
 php artisan migrate
 
 # Auth Installation
@@ -48,3 +50,15 @@ npm run dev
 4. Step 4 - Staff Registration
 
 5. Step 5 - Staff Login & Logout
+
+## Email Verification & Reset Password
+
+1. Understand Onboarding process
+2. Onboarding Routes setup
+3. Create the mail class with following command (optional)
+    > > > php artisan make:mail SendEmail
+4. Signup functionality + Sending verification email
+5. Verify Email
+6. Forgot Password
+7. Reset Password
+8. Login & Logout

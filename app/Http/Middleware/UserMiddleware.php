@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserMiddleware
 {
@@ -16,6 +17,12 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        # Assuming role_id = 1 is for User
+        if (Auth::check() && (Auth::user()->role_id == 2)) {
+            return $next($request);
+        }
+
+        # Return to login
+        return redirect()->route('user.login');
     }
 }

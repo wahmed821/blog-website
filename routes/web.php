@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController as UserAuthController;
 use App\Http\Controllers\Admin\AppController as AdminAppController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\AuthController;
@@ -27,6 +29,30 @@ Route::get('/blogs/{slug}', [AppController::class, 'blogs'])->name("website.blog
 Route::get('/blog/{slug}', [AppController::class, 'blog'])->name("website.blog");
 Route::post('submit-comment', [AppController::class, 'submitComment'])->name("submit-comment");
 
+# User auth routes
+Route::group(['prefix' => 'auth'], function () {
+    Route::get('signup', [UserAuthController::class, 'signup'])->name('user.signup');
+    Route::post('register', [UserAuthController::class, 'register'])->name('user.register');
+
+    Route::get('email-verification', [UserAuthController::class, 'emailVerification'])->name("user.email-verification");
+    Route::post('email-verification', [UserAuthController::class, 'emailVerificationSubmit'])->name("user.email-verification-submit");
+
+    Route::get('login', [UserAuthController::class, 'login'])->name("user.login");
+    Route::post('login-submit', [UserAuthController::class, 'loginSubmit'])->name("user.login-submit");
+
+    Route::get('forgot-password', [UserAuthController::class, 'forgotPassword'])->name("user.forgot-password");
+    Route::post('forgot-password-submit', [UserAuthController::class, 'forgotPasswordSubmit'])->name("user.forgot-password-submit");
+
+    Route::get('reset-password', [UserAuthController::class, 'resetPassword'])->name("user.reset-password");
+    Route::post('reset-password-submit', [UserAuthController::class, 'resetPasswordSubmit'])->name("user.reset-password-submit");
+
+    Route::post('logout', [UserAuthController::class, 'logout'])->name('user.logout');
+});
+
+# User dashboard routes
+Route::middleware(['user'])->prefix('user')->group(function () {
+    Route::get('dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
+});
 
 /*
  * ##### ADMIN ROUTES #####

@@ -23,7 +23,7 @@
                 <div class="card-body">
                     <h4 class="header-title">Fill the Form</h4>
                     <hr>
-                    <form method="post" enctype="multipart/form-data" action="{{ route('blogs.store') }}">
+                    <form method="post" class="common-form" enctype="multipart/form-data" action="{{ route('blogs.store') }}">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">

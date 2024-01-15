@@ -143,6 +143,19 @@ class AppController extends Controller
     ## Function to insert/update blog in DB
     public function storeBlog(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'blog_title' => "required",
+            'status' => "required",
+        ]);
+        if ($validator->fails()) {
+            $result = array(
+                'status' => false,
+                'message' => "Validation error occured",
+                'errors' => $validator->getMessageBag()->toArray()
+            );
+            return response()->json($result, 400); // Bad Request
+        }
+
         try {
             $param = [
                 'blog_title' => $request->blog_title,
@@ -197,12 +210,17 @@ class AppController extends Controller
                     DB::table('blog_categories')->insert($cParam);
                 }
             }
+
+            $result = ['status' => true, 'message' => $msg, 'redirect_to' => route('blogs')];
         } catch (Exception $e) {
-            return redirect()->back()->withError($e->getMessage());
+            //return redirect()->back()->withError($e->getMessage());
+            $result = ['status' => false, 'message' => $e->getMessage()];
         }
 
+        return response()->json($result);
+
         # Redirect to all blogs
-        return redirect()->route('blogs')->withStatus($msg);
+        //return redirect()->route('blogs')->withStatus($msg);
     }
 
     ## View Blog function

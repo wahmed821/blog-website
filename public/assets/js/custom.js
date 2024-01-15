@@ -22,7 +22,7 @@ document.addEventListener("submit", async function(event) {
             console.log(pair[0] + ":" + pair[1]);
         }*/
 
-        // Dynamically determine the API URL based on the form or page
+        // Take out the API URL from form's action attritube
         let apiUrl = form.action;
         if (!apiUrl) {
             error_msg.style.display = "block";
@@ -38,11 +38,20 @@ document.addEventListener("submit", async function(event) {
             });
 
             const result = await response.json();
+            console.log("RESULT", result);
 
             // check the status of the result
             if (result.status == true) {
                 success_msg.style.display = "block";
                 success_msg.innerHTML = result.message;
+
+                // Redirect to other page
+                if (result.redirect_to) {
+                    window.location.href = result.redirect_to;
+                }
+
+                // Reset the form, after getting success response
+                form.reset();
             } else if (result.errors) {
                 let errors = result.errors;
                 let errorUl = document.querySelector("#error_list ul");

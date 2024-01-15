@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Category;
 use App\Models\Blog;
 use Exception;
@@ -56,7 +57,21 @@ class AppController extends Controller
     ## Function to insert/update category in DB
     public function storeCategory(Request $request)
     {
-        ## Validation - Todo (You need to do this)
+        # Valildation
+        $validator = Validator::make($request->all(), [
+            'category_name' => "required",
+            'status' => "required",
+        ]);
+        if ($validator->fails()) {
+            $result = array(
+                'status' => false,
+                'message' => "Validation error occured",
+                'errors' => $validator->getMessageBag()->toArray()
+                //'errors' => $validator->errors()
+            );
+            return response()->json($result, 400); // Bad Request
+        }
+
         try {
             $param = $request->all();
             unset($param['_token']);
@@ -73,11 +88,16 @@ class AppController extends Controller
                 Category::create($param);
                 $msg = "Category has been created successfully";
             }
+            $result = ['status' => true, 'message' => $msg];
         } catch (Exception $e) {
-            return redirect()->back()->withError($e->getMessage());
+            //return redirect()->back()->withError($e->getMessage());
+            $result = ['status' => false, 'message' => $e->getMessage()];
         }
+
+        return response()->json($result);
+
         # Redirect to all categories
-        return redirect()->route('categories')->withStatus($msg);
+        //return redirect()->route('categories')->withStatus($msg);
     }
 
     ## Blogs function
@@ -123,7 +143,6 @@ class AppController extends Controller
     ## Function to insert/update blog in DB
     public function storeBlog(Request $request)
     {
-        ## Validation - Todo (You need to do this)
         try {
             $param = [
                 'blog_title' => $request->blog_title,
@@ -181,6 +200,7 @@ class AppController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->withError($e->getMessage());
         }
+
         # Redirect to all blogs
         return redirect()->route('blogs')->withStatus($msg);
     }

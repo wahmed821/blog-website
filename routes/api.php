@@ -2,9 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ApiController;
 
 /*
-|--------------------------------------------------------------------------
+| ---- ---------------------------------------------------------- ----- -------
 | API Routes
 |--------------------------------------------------------------------------
 |
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
+
+Route::get('get-categories', [ApiController::class, 'getCategories'])->name('get-categories');
+Route::get('get-blogs', [ApiController::class, 'getBlogs'])->name('get-blogs');

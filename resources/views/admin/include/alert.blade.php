@@ -28,3 +28,14 @@
     </div>
 </div>
 @endif
+
+<div class="col-md-12">
+    <div class="alert alert-danger" id="error_msg" style="display:none"></div>
+    <div class="alert alert-success" id="success_msg" style="display:none"></div>
+
+    <div class="alert alert-danger" id="error_list" style="display:none">
+        <strong>Validation errors: please fix the following issues</strong>
+        <ul>
+        </ul>
+    </div>
+</div>

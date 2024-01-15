@@ -42,8 +42,6 @@
             border-radius: 0 2px 2px 0px;
         }
     </style>
-
-
 </head>
 
 <body data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": true}'>
@@ -61,6 +59,7 @@
         <div class="content-page">
             <div class="content">
                 @yield('content')
+                @yield('scripts')
 
             </div> <!-- content -->
 
@@ -105,6 +104,9 @@
 
     <!-- App js-->
     <script src="{{ asset('public/assets/js/app.min.js') }}"></script>
+
+    <!-- Custom js-->
+    <script src="{{ asset('public/assets/js/custom.js') }}"></script>
 </body>
 
 </html>
